@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subrata Mondal | Systems Architect</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=JetBrains+Mono:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --q-cyan: #00ffcc; --q-magenta: #ff00ff; --q-void: #05020a; --data-blue: #00d4ff; --active-lime: #00ff41; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--q-void); color: #fff; overflow-x: hidden; scroll-behavior: smooth; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+        .gradient-text { background: linear-gradient(90deg, var(--q-cyan), var(--q-magenta)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        #hyper-dimension-viewport { width: 100%; height: 600px; background: #000; display: flex; align-items: center; justify-content: center; perspective: 1200px; overflow: hidden; position: relative; border-radius: 30px; }
+        #vortex-canvas { position: absolute; width: 100%; height: 100%; opacity: 0.4; pointer-events: none; }
+        .manifold { position: relative; width: 300px; height: 300px; transform-style: preserve-3d; animation: hyperFloat 25s infinite linear; }
+        @keyframes hyperFloat { 0% { transform: rotateX(0) rotateY(0) rotateZ(0); } 100% { transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg); } }
+        .q-plate { position: absolute; width: 220px; height: 80px; background: rgba(0, 255, 204, 0.05); border: 1px solid var(--q-cyan); backdrop-filter: blur(5px); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.5s ease; cursor: pointer; }
+        .q-plate:hover { background: var(--q-cyan); box-shadow: 0 0 40px var(--q-cyan); transform: scale(1.3) translateZ(100px) !important; z-index: 100; }
+        .q-plate:hover * { color: #000 !important; }
+        .q-plate:nth-child(1) { transform: rotateY(0deg) translateZ(250px); }
+        .q-plate:nth-child(2) { transform: rotateY(72deg) translateZ(250px) rotateX(45deg); }
+        .q-plate:nth-child(3) { transform: rotateY(144deg) translateZ(250px) rotateZ(90deg); }
+        .q-plate:nth-child(4) { transform: rotateY(216deg) translateZ(250px) rotateX(-45deg); }
+        .q-plate:nth-child(5) { transform: rotateY(288deg) translateZ(250px) rotateZ(-90deg); }
+        #sf-synapse-hub { width: 100%; height: 500px; background: #020205; display: flex; border-radius: 20px; overflow: hidden; border: 1px solid #1e293b; }
+        .network-viewport { flex: 1; position: relative; background-image: radial-gradient(circle at center, #111 1px, transparent 1px); background-size: 25px 25px; }
+        .node { position: absolute; width: 40px; height: 40px; border: 2px solid var(--data-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; background: #000; transition: 0.3s; }
+        .node:hover { border-color: var(--active-lime); box-shadow: 0 0 15px var(--active-lime); }
+        .custom-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 9999; align-items: center; justify-content: center; backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body>
+    <nav class="fixed w-full z-[100] glass px-8 py-4 flex justify-between items-center">
+        <div class="font-['Orbitron'] font-black text-xl tracking-tighter">SUBRATA<span class="text-[var(--q-cyan)]">.SYS</span></div>
+        <div class="hidden md:flex space-x-8 text-[10px] font-bold tracking-[0.3em] uppercase">
+            <a href="#about" class="hover:text-[var(--q-cyan)] transition">Profile</a>
+            <a href="#hyper" class="hover:text-[var(--q-cyan)] transition">Logic</a>
+            <a href="#synapse" class="hover:text-[var(--active-lime)] transition">Stack</a>
+        </div>
+    </nav>
+
+    <section id="about" class="min-h-screen flex flex-col justify-center items-center text-center px-4 pt-20">
+        <div class="relative mb-8">
+            <div class="absolute -inset-1 bg-gradient-to-r from-[var(--q-cyan)] to-[var(--q-magenta)] rounded-full blur opacity-75"></div>
+            <img src="https://lh3.googleusercontent.com/d/1QpLuTQwMlkp0e0o-RX0pz2oiMs6xpUlU" alt="Subrata" class="relative rounded-full w-40 h-40 object-cover border-2 border-black">
+        </div>
+        <h1 class="font-['Orbitron'] text-4xl md:text-7xl font-black mb-4 uppercase tracking-tighter">Subrata <span class="gradient-text">Mondal</span></h1>
+        <p class="font-['JetBrains_Mono'] text-slate-400 text-sm md:text-lg tracking-widest uppercase mb-6">MERN Stack & Google Apps Script Expert</p>
+        <div class="flex gap-4">
+            <a href="mailto:beright454@gmail.com" class="px-6 py-2 bg-white text-black font-bold rounded-full hover:bg-[var(--q-cyan)] transition">Hire Expert</a>
+        </div>
+    </section>
+
+    <section id="hyper" class="py-20 px-6 max-w-6xl mx-auto">
+        <div id="hyper-dimension-viewport">
+            <canvas id="vortex-canvas"></canvas>
+            <div class="manifold" id="manifold"></div>
+        </div>
+    </section>
+
+    <section id="synapse" class="py-20 px-6 max-w-6xl mx-auto">
+        <div id="sf-synapse-hub">
+            <div class="network-viewport" id="viewport"></div>
+            <div class="w-full md:w-80 bg-[#0a0a15] p-8 border-l border-sky-900/50 flex flex-col">
+                <div id="disp-id" class="text-[10px] text-[var(--active-lime)] font-mono mb-2">STATUS: IDLE</div>
+                <div id="disp-title" class="font-['Orbitron'] text-lg font-bold mb-4">NODE DECODER</div>
+                <div id="disp-desc" class="text-slate-500 text-xs leading-relaxed">Hover nodes to view protocols.</div>
+            </div>
+        </div>
+    </section>
+
+    <div id="collapse-modal" class="custom-modal">
+        <div class="border-2 border-[var(--q-magenta)] p-10 max-w-lg text-center bg-black">
+            <h2 id="m-title" class="font-['Orbitron'] text-2xl text-[var(--q-magenta)] mb-4"></h2>
+            <p id="m-desc" class="text-slate-300 font-['JetBrains_Mono'] text-sm"></p>
+            <button class="mt-8 px-6 py-2 bg-[var(--q-cyan)] text-black font-bold" onclick="closeQ()">CLOSE</button>
+        </div>
+    </div>
+
+    <script>
+        const hyperServices = [
+            { n: "Apps Script", d: "Automation of Google Workspace.", id: "01" },
+            { n: "Full-Stack", d: "Scalable MERN architectures.", id: "02" },
+            { n: "Cloud Logic", d: "Serverless and API workflows.", id: "03" },
+            { n: "Security", d: "Encryption and Auth systems.", id: "04" },
+            { n: "AI Systems", d: "LLM and OCR integration.", id: "05" }
+        ];
+
+        const manifold = document.getElementById('manifold');
+        hyperServices.forEach((s) => {
+            const plate = document.createElement('div');
+            plate.className = 'q-plate';
+            plate.onclick = () => {
+                document.getElementById('m-title').innerText = s.n;
+                document.getElementById('m-desc').innerText = s.d;
+                document.getElementById('collapse-modal').style.display = 'flex';
+                manifold.style.animationPlayState = 'paused';
+            };
+            plate.innerHTML = `<span class="text-[8px] text-[var(--q-magenta)] font-bold mb-1">DATA_0${s.id}</span><div class="font-['Orbitron'] font-bold text-[10px] text-white uppercase">${s.n}</div>`;
+            manifold.appendChild(plate);
+        });
+
+        function closeQ() { document.getElementById('collapse-modal').style.display = 'none'; manifold.style.animationPlayState = 'running'; }
+
+        const canvas = document.getElementById('vortex-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        canvas.width = window.innerWidth; canvas.height = 600;
+
+        class Particle {
+            constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2; this.speedX = (Math.random() - 0.5) * 1.5; this.speedY = (Math.random() - 0.5) * 1.5; }
+            update() { this.x += this.speedX; this.y += this.speedY; if (this.size > 0.1) this.size -= 0.005; }
+            draw() { ctx.fillStyle = '#00ffcc'; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
+        }
+
+        function animateVortex() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (particles.length < 80) particles.push(new Particle());
+            particles.forEach((p, i) => { p.update(); p.draw(); if (p.size <= 0.1) particles.splice(i, 1); });
+            requestAnimationFrame(animateVortex);
+        }
+
+        const techNodes = [
+            { n: "MERN", d: "Mongo, Express, React, Node.", id: "DB", x: 20, y: 30 },
+            { n: "Python", d: "Data and Scripting automation.", id: "PY", x: 60, y: 20 },
+            { n: "DevOps", d: "CI/CD and GitHub Actions.", id: "OPS", x: 40, y: 70 }
+        ];
+
+        const viewport = document.getElementById('viewport');
+        techNodes.forEach(s => {
+            const node = document.createElement('div');
+            node.className = 'node';
+            node.style.left = s.x + '%'; node.style.top = s.y + '%';
+            node.innerHTML = `<span class="text-[8px] text-sky-400 font-bold font-mono">${s.id}</span>`;
+            node.addEventListener('mouseenter', () => {
+                document.getElementById('disp-id').innerText = `NODE: ${s.id}`;
+                document.getElementById('disp-title').innerText = s.n;
+                document.getElementById('disp-desc').innerText = s.d;
+            });
+            viewport.appendChild(node);
+        });
+        window.onload = animateVortex;
+    </script>
+</body>
+</html>
